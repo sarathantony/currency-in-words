@@ -1,0 +1,8 @@
+# for local installation (npm link)
+./test-folder
+
+# dist
+dist
+
+# node modules
+node_modules
