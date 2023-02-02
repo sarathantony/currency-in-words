@@ -1,6 +1,6 @@
 {
   "name": "currency-in-words",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "convert currency or any numbers to corresponding words, eg: 1 -> \"one\", 10 -> \"ten\", 101 -> \"one hundred and one\" etc...",
   "main": "src/index.js",
   "scripts": {
