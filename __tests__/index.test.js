@@ -1,6 +1,26 @@
 const { convert } = require('../src/index')
 
 describe('Convert', () => {
+  it('returns "NaN" for undefined', () => {
+    const result = convert(undefined)
+    expect(result).toEqual('NaN')
+  })
+  it('returns "NaN" for null', () => {
+    const result = convert(null)
+    expect(result).toEqual('NaN')
+  })
+  it('returns "NaN" for an invalid number(a1.01)', () => {
+    const result = convert('a1.01')
+    expect(result).toEqual('NaN')
+  })
+  it('returns "NaN" for an invalid number(1.1a)', () => {
+    const result = convert('1.1a')
+    expect(result).toEqual('NaN')
+  })
+  it('returns "NaN" for an invalid number(random string)', () => {
+    const result = convert('random string')
+    expect(result).toEqual('NaN')
+  })
   it('returns "one" when given the input 1', () => {
     const result = convert('1')
     expect(result).toEqual('one')
@@ -81,8 +101,206 @@ describe('Convert', () => {
     const result = convert('1199')
     expect(result).toEqual('one thousand one hundred ninety nine')
   })
-  it('returns "one hundred nine hundred" when given the input 1900', () => {
+  it('returns "one thousand nine hundred" when given the input 1900', () => {
     const result = convert('1900')
     expect(result).toEqual('one thousand nine hundred')
+  })
+  it('returns "one thousand nine hundred ninety nine" when given the input 1999', () => {
+    const result = convert('1999')
+    expect(result).toEqual('one thousand nine hundred ninety nine')
+  })
+  it('returns "ten thousand" when given the input 10000', () => {
+    const result = convert('10000')
+    expect(result).toEqual('ten thousand')
+  })
+  it('returns "eleven thousand one hundred nine" when given the input 11109', () => {
+    const result = convert('11109')
+    expect(result).toEqual('eleven thousand one hundred nine')
+  })
+  it('returns "eleven thousand one hundred ten" when given the input 11110', () => {
+    const result = convert('11110')
+    expect(result).toEqual('eleven thousand one hundred ten')
+  })
+  it('returns "eleven thousand one hundred eleven" when given the input 11111', () => {
+    const result = convert('11111')
+    expect(result).toEqual('eleven thousand one hundred eleven')
+  })
+  it('returns "eleven thousand one hundred nineteen" when given the input 11119', () => {
+    const result = convert('11119')
+    expect(result).toEqual('eleven thousand one hundred nineteen')
+  })
+  it('returns "eleven thousand one hundred ninety" when given the input 11190', () => {
+    const result = convert('11190')
+    expect(result).toEqual('eleven thousand one hundred ninety')
+  })
+  it('returns "eleven thousand one hundred ninety nine" when given the input 11199', () => {
+    const result = convert('11199')
+    expect(result).toEqual('eleven thousand one hundred ninety nine')
+  })
+  it('returns "one lakh" when given the input 1,00,000', () => {
+    const result = convert('100000')
+    expect(result).toEqual('one lakh')
+  })
+  it('returns "one lakh eleven thousand one hundred nine" when given the input 1,11,109', () => {
+    const result = convert('111109')
+    expect(result).toEqual('one lakh eleven thousand one hundred nine')
+  })
+  it('returns "one lakh eleven thousand one hundred ten" when given the input 1,11,110', () => {
+    const result = convert('111110')
+    expect(result).toEqual('one lakh eleven thousand one hundred ten')
+  })
+  it('returns "one lakh eleven thousand one hundred eleven" when given the input 1,11,111', () => {
+    const result = convert('111111')
+    expect(result).toEqual('one lakh eleven thousand one hundred eleven')
+  })
+  it('returns "one lakh eleven thousand one hundred nineteen" when given the input 1,11,119', () => {
+    const result = convert('111119')
+    expect(result).toEqual('one lakh eleven thousand one hundred nineteen')
+  })
+  it('returns "one lakh leven thousand one hundred ninety" when given the input 1,11,190', () => {
+    const result = convert('111190')
+    expect(result).toEqual('one lakh eleven thousand one hundred ninety')
+  })
+  it('returns "one lakh eleven thousand one hundred ninety nine" when given the input 1,11,199', () => {
+    const result = convert('111199')
+    expect(result).toEqual('one lakh eleven thousand one hundred ninety nine')
+  })
+  it('returns "ten lakh" when given the input 10,00,000', () => {
+    const result = convert('1000000')
+    expect(result).toEqual('ten lakh')
+  })
+  it('returns "ten lakh eleven thousand one hundred nine" when given the input 10,11,109', () => {
+    const result = convert('1011109')
+    expect(result).toEqual('ten lakh eleven thousand one hundred nine')
+  })
+  it('returns "ten lakh eleven thousand one hundred ten" when given the input 10,11,110', () => {
+    const result = convert('1011110')
+    expect(result).toEqual('ten lakh eleven thousand one hundred ten')
+  })
+  it('returns "ten lakh eleven thousand one hundred eleven" when given the input 10,11,111', () => {
+    const result = convert('1011111')
+    expect(result).toEqual('ten lakh eleven thousand one hundred eleven')
+  })
+  it('returns "ten lakh eleven thousand one hundred nineteen" when given the input 10,11,119', () => {
+    const result = convert('1011119')
+    expect(result).toEqual('ten lakh eleven thousand one hundred nineteen')
+  })
+  it('returns "ten lakh leven thousand one hundred ninety" when given the input 10,11,190', () => {
+    const result = convert('1011190')
+    expect(result).toEqual('ten lakh eleven thousand one hundred ninety')
+  })
+  it('returns "ten lakh eleven thousand one hundred ninety nine" when given the input 10,11,199', () => {
+    const result = convert('1011199')
+    expect(result).toEqual('ten lakh eleven thousand one hundred ninety nine')
+  })
+  it('returns "one crore" when given the input 1,00,00,000', () => {
+    const result = convert('10000000')
+    expect(result).toEqual('one crore')
+  })
+  it('returns "one crore one lakh eleven thousand one hundred nine" when given the input 1,01,11,109', () => {
+    const result = convert('10111109')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred nine')
+  })
+  it('returns "one crore one lakh eleven thousand one hundred ten" when given the input 1,01,11,110', () => {
+    const result = convert('10111110')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred ten')
+  })
+  it('returns "one crore one lakh eleven thousand one hundred eleven" when given the input 1,01,11,111', () => {
+    const result = convert('10111111')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred eleven')
+  })
+  it('returns "oone crore ne lakh eleven thousand one hundred nineteen" when given the input 1,11,119', () => {
+    const result = convert('10111119')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred nineteen')
+  })
+  it('returns "one crore one lakh leven thousand one hundred ninety" when given the input 1,11,190', () => {
+    const result = convert('10111190')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred ninety')
+  })
+  it('returns "one crore one lakh eleven thousand one hundred ninety nine" when given the input 1,11,199', () => {
+    const result = convert('10111199')
+    expect(result).toEqual('one crore one lakh eleven thousand one hundred ninety nine')
+  })
+  it('returns "ten crore ten lakh" when given the input 10,00,00,000', () => {
+    const result = convert('101000000')
+    expect(result).toEqual('ten crore ten lakh')
+  })
+  it('returns "tten crore en lakh eleven thousand one hundred nine" when given the input 10,00,11,109', () => {
+    const result = convert('101011109')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred nine')
+  })
+  it('returns "ten crore ten lakh eleven thousand one hundred ten" when given the input 10,00,11,110', () => {
+    const result = convert('101011110')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred ten')
+  })
+  it('returns "ten crore ten lakh eleven thousand one hundred eleven" when given the input 10,00,11,111', () => {
+    const result = convert('101011111')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred eleven')
+  })
+  it('returns "ten crore ten lakh eleven thousand one hundred nineteen" when given the input 10,00,11,119', () => {
+    const result = convert('101011119')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred nineteen')
+  })
+  it('returns "ten crore ten lakh leven thousand one hundred ninety" when given the input 10,00,11,190', () => {
+    const result = convert('101011190')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred ninety')
+  })
+  it('returns "ten crore ten lakh eleven thousand one hundred ninety nine" when given the input 10,00,11,199', () => {
+    const result = convert('101011199')
+    expect(result).toEqual('ten crore ten lakh eleven thousand one hundred ninety nine')
+  })
+
+  /**
+   * Logically everything should work fine with the tests above, but some random numbers, just for fool proofing..
+   */
+
+  it('returns "five hundred fifty five" when given the input 555', () => {
+    const result = convert('555')
+    expect(result).toEqual('five hundred fifty five')
+  })
+  it('returns "seventy seven thousand two hundred eighty nine" when given the input 77,289', () => {
+    const result = convert('77289')
+    expect(result).toEqual('seventy seven thousand two hundred eighty nine')
+  })
+  it('returns "seventeen crore ninety nine lakh one hundred" when given the input 17,99,00,100', () => {
+    const result = convert('179900100')
+    expect(result).toEqual('seventeen crore ninety nine lakh one hundred')
+  })
+  it('returns "ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine" when given the input 99,99,99,999', () => {
+    const result = convert('999999999')
+    expect(result).toEqual('ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine')
+  })
+
+  /**
+   * And few more..
+   */
+
+  it('returns "one.one" when given the input 1.1', () => {
+    const result = convert('1.1')
+    expect(result).toEqual('one.one')
+  })
+  it('returns "fifty seven.ninety nine" when given the input 57.99', () => {
+    const result = convert('57.99')
+    expect(result).toEqual('fifty seven.ninety nine')
+  })
+  it('returns "ten" when given the input 10.01; neglect x.01 to x.09', () => {
+    const result = convert('10.01')
+    expect(result).toEqual('ten')
+  })
+  it('returns "zero" when given the input 0.00', () => {
+    const result = convert('0.00')
+    expect(result).toEqual('zero')
+  })
+  it('returns "zero" when given the input 000', () => {
+    const result = convert('000')
+    expect(result).toEqual('zero')
+  })
+  it('returns "three hundred thirty" when given the input 00330; corrected leading zeros', () => {
+    const result = convert('00330')
+    expect(result).toEqual('three hundred thirty')
+  })
+  it('returns "eighty eight.twenty" when given the input 088.200; corrected leading zeros and two decimal places', () => {
+    const result = convert('088.200')
+    expect(result).toEqual('eighty eight.twenty')
   })
 })

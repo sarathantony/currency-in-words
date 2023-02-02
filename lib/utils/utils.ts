@@ -1,4 +1,4 @@
-"use strict" 
+"use strict"
 
 export const singleDigit: Array<string> = [
   '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', ''
@@ -10,6 +10,13 @@ export const caseOne: Array<string> = [
   '', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', ''
 ]
 
+function isFirstCharZero(key: string): boolean {
+  return +key[0] === 0
+}
+function isSecondCharZero(key: string): boolean {
+  return +key[1] === 0
+}
+
 /**
  * Pass "key" as string for function argument, but cast to number (+key) when used as Array<string> index
  */
@@ -20,46 +27,65 @@ export function handleTeens(key: string): string {
   if (+key[0] === 1)
     return caseOne[+key.slice(-1)]
   else
-    return `${twoDigit[+key[0]]} ${singleDigit[+key.slice(-1)]}` 
+    return `${twoDigit[+key[0]]} ${singleDigit[+key.slice(-1)]}`
 }
 export function handleTens(key: string): string {
-  if (+key[1] === 0) return `${twoDigit[+key[0]]}`
-  else return handleTeens(key)
+  if (isFirstCharZero(key))
+    return `${singleDigit[+key[1]]}`
+  if (isSecondCharZero(key))
+    return `${twoDigit[+key[0]]}`
+
+  return handleTeens(key)
 }
 export function handleHundreds(key: string): string {
+  if (isFirstCharZero(key))
+    return `${handleTens(key.substring(1))}`
   if (key.substring(1) === '00')
     return `${singleDigit[+key[0]]} hundred`
-  if (+key[0] === 0 && +key[1] === 0)
-    return `${handleOnes(key[2])}`
-  if (+key[1] === 0)
-    return `${handleOnes(key[0])} hundred ${handleOnes(key.slice(-1))}`
-  if (+key[0] === 0)
-    return `${handleTens(key.substring(1))}`
-  return `${handleOnes(key[0])} hundred ${handleTens(key.substring(1))}`
+
+  return `${singleDigit[+key[0]]} hundred ${handleTens(key.substring(1))}`
 }
 export function handleThousands(key: string): string {
-  if (key.substring(1) === '000')
-    return `${singleDigit[+key[0]]} thousand`
-  if (key.match(/^.[0][0]/))
-    return `${singleDigit[+key[0]]} thousand ${singleDigit[+key.slice(-1)]}`
-  if (+key[1] === 0)
-    return `${singleDigit[+key[0]]} thousand ${handleTens(key.substring(2))}`
+  if (isFirstCharZero(key))
+    return `${handleHundreds(key.substring(1))}`
+  if (isSecondCharZero(key))
+    return `${singleDigit[+key[0]]} thousand ${handleHundreds(key.substring(1))}`
+
   return `${singleDigit[+key[0]]} thousand ${handleHundreds(key.substring(1))}`
 }
 export function handleTenThousands(key: string): string {
-  if (+key[1] === 0)
+  if (isFirstCharZero(key))
+    return `${handleThousands(key.substring(1))}`
+  if (isSecondCharZero(key))
     return `${twoDigit[+key[0]]} thousand ${handleHundreds(key.substring(2))}`
+
   return `${handleTens(key.substring(0, 2))} thousand ${handleHundreds(key.slice(-3))}`
 }
 export function handleLakh(key: string): string {
+  if (isFirstCharZero(key))
+    return `${handleTenThousands(key.substring(1))}`
+
   return `${singleDigit[+key[0]]} lakh ${handleTenThousands(key.substring(1))}`
 }
 export function handleTenLakh(key: string): string {
+  if (isFirstCharZero(key))
+    return `${handleLakh(key.substring(1))}`
+  if (isSecondCharZero(key))
+    return `${twoDigit[+key[0]]} lakh ${handleTenThousands(key.substring(2))}`
+
   return `${handleTens(key.substring(0, 2))} lakh ${handleTenThousands(key.substring(2))}`
 }
 export function handleCrore(key: string): string {
+  if (isFirstCharZero(key))
+    return `${handleTenLakh(key.substring(1))}`
+
   return `${singleDigit[+key[0]]} crore ${handleTenLakh(key.substring(1))}`
 }
 export function handleTenCrore(key: string): string {
-  return `${handleTens(key.substring(0, 2))} ${handleCrore(key.substring(2))}`
+  if (isSecondCharZero(key))
+    return `${twoDigit[+key[0]]} crore ${handleTenLakh(key.substring(2))}`
+
+  return `${handleTens(key.substring(0, 2))} crore ${handleTenLakh(key.substring(2))}`
 }
+
+//  not handling more than Cr.10 for now, but promising there will be an updated version..

@@ -1,26 +1,16 @@
 # currency-in-words
 
 **Convert currency or any number formats to respective words**
-
-
 ___
-### __For local installation and testing__
-
 
 ```javascript
-cd package
-npm link
-cd ../
-mkdir test-folder
-cd test-folder
-npm link currency-in-words
-touch script.js
+import convert from 'currency-in-words'
+
+const result = convert('777')
 ```
 
-> script.js
+Adding test-case results just to make your life easier..
 
-```javascript
-const convert = require('currency-in-words')
+<img src="./public/test1.png">
 
-console.log('test 5', convert('5'))
-```
+<img src="./public/test2.png">
