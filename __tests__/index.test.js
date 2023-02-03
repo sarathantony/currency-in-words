@@ -283,7 +283,7 @@ describe('Convert', () => {
     const result = convert('57.99')
     expect(result).toEqual('fifty seven.ninety nine')
   })
-  it('returns "ten" when given the input 10.01; neglect x.01 to x.09', () => {
+  it('returns "ten" when given the input 10.01; ignore x.01 to x.09', () => {
     const result = convert('10.01')
     expect(result).toEqual('ten')
   })

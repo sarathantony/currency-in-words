@@ -1,16 +1,21 @@
-const {
-  singleDigit, caseOne, twoDigit,
-  handleOnes, handleTens, handleHundreds, handleThousands,
-  handleTenThousands, handleLakh, handleTenLakh, handleCrore, handleTenCrore
-} = require('../lib/utils/utils')
+import { handleOnes, handleTens } from './utils/common'
+import {
+  handleHundreds, handleThousands, handleTenThousands, handleLakh, handleTenLakh, handleCrore, handleTenCrore
+} from './utils/in'
 
 interface valueMap {
   [key: number]: string | Function
 }
 
-export function convert(value: string): string {
+type standard = 'in' | 'int'
+interface params {
+  format?: standard
+}
+
+export function convert(
+  value: string, { format }: params = { format: 'int' }
+  ): string {
   const regex = /^\d*(\.\d+)?$/
-  //  handle null and undefined..
   if (!value || !value.match(regex)) return 'NaN'
 
   const [integer, fraction] = value.split('.')
@@ -34,8 +39,8 @@ export function convert(value: string): string {
   const integerResult = (indian[zeroCorrected.length] as Function)(zeroCorrected)
   let result = integerResult
 
-  if (fraction && +fraction[0] !== 0) // neglect .01 - .09
-    result = `${result}.${(indian[fraction.substring(0, 2).length] as Function)(fraction.substring(0, 2))}` //  limit to two decimal places.
+  if (fraction && +fraction[0] !== 0) // ignore .01 - .09
+    result = `${result}.${(indian[fraction.substring(0, 2).length] as Function)(fraction.substring(0, 2))}` //  limit to two decimal places.`
 
   return result.trim()
 }
