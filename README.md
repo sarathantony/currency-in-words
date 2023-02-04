@@ -2,10 +2,14 @@
 
 **Convert currency or any number formats to respective words**
 ___
+
 > **Note**
+
 ___
-> 1. Current version supports only indian system. But, subsequent versions will support international version.|
-> 2. Commas in the test cases are just for readability, but doesn't support in the input.                     |
+
+> 1. Current version supports only indian system. But, subsequent versions will support international version.
+> 2. Commas in the test cases are just for readability, but doesn't support in the input.
+
 ___
 
 ### Installation:
@@ -111,11 +115,13 @@ Convert
     ✓ returns "eighty eight.twenty" when given the input 088.200; corrected leading zeros and two decimal places
 ```
 
+
 #### Hacks :rocket:
 
 For some reason, if you want the decimal places not to be corrected, you can control from your code level,
 
 ```javascript
-const [dollars, cents] = amount
-const billAmout = `${convert(dollars)}.${convert(cents)}`
+const amount = '123.123'
+const [dollars, cents] = amount.split('.')
+const result = `${convert(dollars)}.${convert(cents)}`
 ```
