@@ -1,6 +1,6 @@
 {
   "name": "currency-in-words",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "description": "A light-weight, fast and efficient lib that converts currency or any numbers to corresponding words",
   "main": "src/index.js",
   "scripts": {
