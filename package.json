@@ -1,6 +1,6 @@
 {
   "name": "currency-in-words",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Handles both indian-system and international-system. A light-weight, fast and efficient lib that converts currency or any numbers to corresponding words",
   "main": "src/index.js",
   "scripts": {
