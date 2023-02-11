@@ -4,9 +4,11 @@ import { handleTens } from "./common"
 function spliceLastThree(value: Array<string>): string {
   return value.splice(-3).join('')
 }
+
 function resolveValue(value: string, placeholder: string): string {
   return parseInt(value) ? `${handleHundreds(value)} ${placeholder} ` : ``
 }
+
 function handleHundreds(value: string): string {
   const parsedValue = `${parseInt(value)}`
 
@@ -17,7 +19,7 @@ function handleHundreds(value: string): string {
   return `${singleDigit[+value[0]]} hundred ${handleTens(value.substring(1))}`.trim()
 }
 
-export function convertIntl(value: string): string {
+function convertIntl(value: string): string {
   if (parseInt(value) === 0) return 'zero'
 
   const [integer, fraction] = value.split('.')
@@ -33,3 +35,5 @@ export function convertIntl(value: string): string {
 
   return result
 }
+
+export { convertIntl }

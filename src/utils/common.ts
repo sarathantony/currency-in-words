@@ -1,29 +1,31 @@
 import { singleDigit, caseOne, twoDigit } from "../lang/en"
 
-export function isFirstCharZero(key: string): boolean {
-  return +key[0] === 0
-}
-export function isSecondCharZero(key: string): boolean {
-  return +key[1] === 0
+function isFirstCharZero(value: string): boolean {
+  return +value[0] === 0
 }
 
-/**
- * Pass "key" as string for function argument, but cast to number (+key) when used as Array<string> index
- */
-export function handleOnes(key: string): string {
-  return singleDigit[+key]
+function isSecondCharZero(value: string): boolean {
+  return +value[1] === 0
 }
-export function handleTeens(key: string): string {
-  if (+key[0] === 1)
-    return caseOne[+key.slice(-1)]
+
+function handleOnes(value: string): string {
+  return singleDigit[+value]
+}
+
+function handleTeens(value: string): string {
+  if (+value[0] === 1)
+    return caseOne[+value.slice(-1)]
   else
-    return `${twoDigit[+key[0]]} ${singleDigit[+key.slice(-1)]}`
+    return `${twoDigit[+value[0]]} ${singleDigit[+value.slice(-1)]}`
 }
-export function handleTens(key: string): string {
-  if (isFirstCharZero(key))
-    return `${singleDigit[+key[1]]}`
-  if (isSecondCharZero(key))
-    return `${twoDigit[+key[0]]}`
 
-  return handleTeens(key)
+function handleTens(value: string): string {
+  if (isFirstCharZero(value))
+    return `${singleDigit[+value[1]]}`
+  if (isSecondCharZero(value))
+    return `${twoDigit[+value[0]]}`
+
+  return handleTeens(value)
 }
+
+export { isFirstCharZero, isSecondCharZero, handleOnes, handleTeens, handleTens }
