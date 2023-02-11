@@ -3,11 +3,14 @@
 **Convert currency or similar number formats to respective words**
 ___
 
+
 ### Installation:
 
 ```javascript
 npm i currency-in-words
 ```
+___
+
 
 ### Usage:
 
@@ -15,12 +18,12 @@ npm i currency-in-words
 import { convert } from 'currency-in-words'
 
 //  indian-system
-const result = convert('777')
+const result = convert('777') // seven hundred seventy seven
 //  or
-const result = convert('777', { format: 'in' })
+const result = convert('777', { format: 'in' }) // seven hundred seventy seven
 
 //  international-system
-const result = convert('777', { format: 'intl' })
+const result = convert('777', { format: 'intl' }) // seven hundred seventy seven
 ```
 
 ```javascript
@@ -35,8 +38,10 @@ console.log('100000', { format: 'int' }) // one hundred thousand
 > *Note*
 > 1. Expect ```NaN``` when ',' is present, eg: '100,000.99'
 > 2. Decimals are corrected to two places
+___
 
-#### :rocket: Hacks
+
+### :rocket:   Hacks
 
 > Some of the features are not implemented for the sake of backward compatability between versions. Hey, but you can always find a way around..
 
@@ -45,15 +50,14 @@ Hard time passing it as a string? cast it from the source
 
 ```javascript
 const amount = 0.99
-const inWords = convert(`${amount}`)
+const result = convert(`${amount}`) //  zero.ninety nine
 ```
 
 To eliminate commas
 
 ```javascript
-const regex = /,/g
 const amount = '1,000.99'
-const replaced = amount.replace(regex, '')
+const sanitized = amount.replace(/,/, '') //  1000.99
 ```
 
 For some reason, if you want the decimal places not to be corrected, control it from your code
@@ -61,14 +65,18 @@ For some reason, if you want the decimal places not to be corrected, control it 
 ```javascript
 const amount = '123.123'
 const [dollars, cents] = amount.split('.')
-const result = `${convert(dollars)}.${convert(cents)}`
+const result = `${convert(dollars)}.${convert(cents)}` // one hundred twenty threee.one hundred twenty three
 ```
+___
 
-Adding few test-case results just to make your life easier..
+
+**Test Case Results**
+
+#### Added few test-case results just to make your life easier..
 
 > **Note**: Commas in the test cases are just for readability, but doesn't support in the input.
 
-<div style="display:block;padding:20px;height:200px;overflow-y:scroll;background-color: #eee;border: 1px solid #999;">
+<div style="display:block;padding:20px;max-height:200px;overflow:scroll;background-color: #eee;border: 1px solid #999;">
   <pre>
     <code>
       Convert Indian system
