@@ -19,21 +19,23 @@ function handleHundreds(value: string): string {
   return `${singleDigit[+value[0]]} hundred ${handleTens(value.substring(1))}`.trim()
 }
 
-function convertIntl(value: string): string {
-  if (parseInt(value) === 0) return 'zero'
+function convertIntl(integer: string, fraction: string, twoDecimalPlaces: string): string {
+  if (parseInt(integer) === 0) return 'zero'
 
-  const [integer, fraction] = value.split('.')
   const integerSplitted: Array<string> = integer.split('')
   const hundreds: string = spliceLastThree(integerSplitted)
   const thousands: string = spliceLastThree(integerSplitted)
   const millions: string = spliceLastThree(integerSplitted)
   const billions: string = spliceLastThree(integerSplitted)
+  const trillions: string = spliceLastThree(integerSplitted)
 
   let result =
-    `${resolveValue(billions, 'billion')}${resolveValue(millions, 'million')}${resolveValue(thousands, 'thousand')}${handleHundreds(hundreds)}`
-  if (fraction) result = `${result}.${handleTens(fraction.substring(0, 2))}`
+    `${resolveValue(trillions, 'trillion')}${resolveValue(billions, 'billion')}${resolveValue(millions, 'million')}${resolveValue(thousands, 'thousand')}${handleHundreds(hundreds)}`
 
-  return result
+  if (fraction && +fraction[0] !== 0)
+  result = `${result.trim()}.${handleTens(twoDecimalPlaces)}`
+
+  return result.trim()
 }
 
 export { convertIntl }

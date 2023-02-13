@@ -1,4 +1,4 @@
-import { convertIntl, indianFormat, handleTens } from './utils'
+import { convertIntl, indianFormat, handleTens, convertInd } from './utils'
 
 type standard = 'in' | 'intl'
 type language = 'en'
@@ -20,20 +20,6 @@ export function convert(
   if (parseInt(fraction, 10) && zeroCorrected === '0') return `zero.${handleTens(twoDecimalPlaces)}`
   if (zeroCorrected === '0') return 'zero'
 
-  let result = ''
-
-  if (format === 'intl') {
-    result = convertIntl(zeroCorrected)
-
-    if (fraction && +fraction[0] !== 0)
-      result = `${result.trim()}.${handleTens(twoDecimalPlaces)}`
-  } else {
-    const integerResult = (indianFormat[zeroCorrected.length] as Function)(zeroCorrected)
-    result = integerResult
-
-    if (fraction && +fraction[0] !== 0) // ignore .01 - .09
-      result = `${result}.${(indianFormat[twoDecimalPlaces.length] as Function)(twoDecimalPlaces)}` //  limit to two decimal places.`
-    }
-
-  return result.trim()
+  return format === 'intl' ?
+    convertIntl(zeroCorrected, fraction, twoDecimalPlaces) : convertInd(zeroCorrected, fraction, twoDecimalPlaces)
 }

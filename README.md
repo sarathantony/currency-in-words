@@ -1,18 +1,18 @@
 # currency-in-words
 
 **Convert currency or similar number formats to respective words**
-___
-
+<br>
 
 ### Installation:
+___
+<br>
 
 ```javascript
 npm i currency-in-words
 ```
-___
-
 
 ### Usage:
+___
 
 ```javascript
 import { convert } from 'currency-in-words'
@@ -38,43 +38,50 @@ console.log('100000', { format: 'int' }) // one hundred thousand
 > *Note*
 > 1. Expect ```NaN``` when ',' is present, eg: '100,000.99'
 > 2. Decimals are corrected to two places
+
+<br>
+
+### :rocket: Hacks
 ___
 
 
-### :rocket:   Hacks
-
 > Some of the features are not implemented for the sake of backward compatability between versions. Hey, but you can always find a way around..
 
-
+<br>
 Hard time passing it as a string? cast it from the source
+<br>
 
 ```javascript
 const amount = 0.99
 const result = convert(`${amount}`) //  zero.ninety nine
 ```
-
+<br>
 To eliminate commas
+<br>
 
 ```javascript
 const amount = '1,000.99'
 const sanitized = amount.replace(/,/, '') //  1000.99
 ```
-
+<br>
 For some reason, if you want the decimal places not to be corrected, control it from your code
+<br>
 
 ```javascript
 const amount = '123.123'
 const [dollars, cents] = amount.split('.')
 const result = `${convert(dollars)}.${convert(cents)}` // one hundred twenty threee.one hundred twenty three
 ```
+<br>
+
+### Test Case Results
 ___
 
-
-**Test Case Results**
-
-#### Added few test-case results just to make your life easier..
+**Added few test-case results just to make your life easier..**
+<br>
 
 > **Note**: Commas in the test cases are just for readability, but doesn't support in the input.
+<br>
 
 <div style="display:block;padding:20px;max-height:200px;overflow:scroll;background-color: #eee;border: 1px solid #999;">
   <pre>

@@ -307,6 +307,10 @@ describe('Convert Indian system', () => {
     const result = convert('0.00')
     expect(result).toEqual('zero')
   })
+  it('returns "one hundred crore" when given the input 1,00,00,00,000', () => {
+    const result = convert('1000000000')
+    expect(result).toEqual('one hundred crore')
+  })
 })
 
 describe('Convert international system', () => {
