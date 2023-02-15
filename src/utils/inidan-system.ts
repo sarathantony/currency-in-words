@@ -96,4 +96,14 @@ function convertInd(integer: string, fraction?: string, twoDecimalPlaces?: strin
   return result.trim()
 }
 
-export { indianFormat, handleTenLakh, handleCrore, handleTenCrore, convertInd }
+export {
+  indianFormat,
+  handleHundreds,
+  handleThousands,
+  handleTenThousands,
+  handleLakh,
+  handleTenLakh,
+  handleCrore,
+  handleTenCrore,
+  convertInd
+}

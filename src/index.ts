@@ -1,4 +1,4 @@
-import { convertIntl, indianFormat, handleTens, convertInd } from './utils'
+import { convertIntl, handleTens, convertInd } from './utils'
 
 type standard = 'in' | 'intl'
 type language = 'en'
