@@ -6,7 +6,7 @@ const {
   handleTens
 } = require('../src/utils/common')
 
-describe('Expects true when first char of the passed in string is number zero', () => {
+describe('First char of the passed in string should be literal zero', () => {
   it ('Should return true when passed in 00', () => {
     const result = isFirstCharZero('000')
     expect(result).toBeTruthy()
@@ -21,7 +21,7 @@ describe('Expects true when first char of the passed in string is number zero', 
   })
 })
 
-describe('Expects true when second char of the passed in string is number zero', () => {
+describe('Second char of the passed in string should be zero', () => {
   it ('Should return true when passed in 10', () => {
     const result = isSecondCharZero('000')
     expect(result).toBeTruthy()

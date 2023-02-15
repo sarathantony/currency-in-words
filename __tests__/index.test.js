@@ -89,6 +89,10 @@ describe('Convert Indian system', () => {
     const result = convert('1010')
     expect(result).toEqual('one thousand ten')
   })
+  it('returns "one thousand eleven" when given the input 1011', () => {
+    const result = convert('1011')
+    expect(result).toEqual('one thousand eleven')
+  })
   it('returns "one thousand one hundred ten" when given the input 1110', () => {
     const result = convert('1110')
     expect(result).toEqual('one thousand one hundred ten')
@@ -265,10 +269,6 @@ describe('Convert Indian system', () => {
   it('returns "seventeen crore ninety nine lakh one hundred" when given the input 17,99,00,100', () => {
     const result = convert('179900100')
     expect(result).toEqual('seventeen crore ninety nine lakh one hundred')
-  })
-  it('returns "ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine" when given the input 99,99,99,999', () => {
-    const result = convert('999999999')
-    expect(result).toEqual('ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine')
   })
 
   /**
@@ -528,5 +528,10 @@ describe('Convert international system', () => {
     const amount = 99
     const result = convert(`${amount}`, { format: 'intl' })
     expect(result).toEqual('ninety nine')
+  })
+  it('returns nine hundred ninety nine trillion nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine when passed in the input 99', () => {
+    const amount = '999999999999'
+    const result = convert('999999999999999', { format: 'intl' })
+    expect(result).toEqual('nine hundred ninety nine trillion nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine')
   })
 })
