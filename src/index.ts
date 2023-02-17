@@ -17,6 +17,8 @@ export function convert(
   const zeroCorrected: string = `${parseInt(integer, 10)}`
   const twoDecimalPlaces: string = parseInt(fraction, 10) ? `${fraction.substring(0, 2)}` : ``
 
+  if (zeroCorrected.length > 15) throw new RangeError('Number exceeds the range')
+
   if (parseInt(fraction, 10) && zeroCorrected === '0') return `zero.${handleTens(twoDecimalPlaces)}`
   if (zeroCorrected === '0') return 'zero'
 

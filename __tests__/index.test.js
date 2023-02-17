@@ -78,6 +78,29 @@ describe('indian-system: random numbers', () => {
     const result = convert('179900100')
     expect(result).toEqual('seventeen crore ninety nine lakh one hundred')
   })
+  it('expects one hundred crore, when passed in 1,00,00,00,000', () => {
+    const result = convert('1000000000')
+    expect(result).toBe('one hundred crore')
+  })
+  it('expects one lakh crore, when passed in 10,00,00,00,00,000', () => {
+    const result = convert('1000000000000')
+    expect(result).toBe('one lakh crore')
+  })
+  it('expects ninety nine crore ninety nine lakhs ninety nine thousand nine hundred ninety nine, when passed in 99,99,99,99,99,99,99,999',
+    () => {
+      const result = convert('100000000000000').trim()
+      expect(result).toBe('one crore crore')
+  })
+  it('expects nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine, when passed in 9999999999999999',
+    () => {
+      const result = convert('999999999999999').trim()
+      expect(result).toBe('nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine')
+  })
+  it('expects ninety nine crore ninety nine lakhs ninety nine thousand nine hundred ninety nine, when passed in 99,99,99,99,99,99,99,999',
+    () => {
+      const input = '9999999999999999'
+      expect(() => convert(input)).toThrow(RangeError)
+  })
 })
 
 describe('international-system: valid inputs', () => {

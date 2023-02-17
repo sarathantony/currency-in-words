@@ -44,15 +44,18 @@ console.log('100000', { format: 'int' }) // one hundred thousand
 ### Precision
 ___
 
+Supports upto 15 digits for both indian and international systems on their integer part. A RangeError will be thrown for length beyond 15.
+
+eg: calling convert with 100,000,000,000,000 * 10 will throw an error
+
 ```java
-International system
+International system:
 
-999,999,999,999,999.99 (1 quadrillion - 1).99
-nine hundred ninety nine trillion nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine.ninety nine
+999,999,999,999,999 (1 quadrillion - 1)
 
-Indian system
+Indian system:
 
-
+99,99,99,99,99,99,999 (100 crore crore - 1)
 
 ```
 
