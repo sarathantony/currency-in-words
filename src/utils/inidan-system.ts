@@ -1,4 +1,3 @@
-
 import { singleDigit, twoDigit } from '../lang/en'
 import { isFirstCharZero, isSecondCharZero, handleOnes, handleTens } from './common'
 
@@ -16,7 +15,8 @@ const indianFormat: IIndianFormat = {
   6: handleLakh,
   7: handleTenLakh,
   8: handleCrore,
-  9: handleTenCrore
+  9: handleTenCrore,
+  10: handleArabs
 }
 
 function handleHundreds(value: string): string {
@@ -73,4 +73,37 @@ function handleTenCrore(value: string): string {
   return `${handleTens(value.substring(0, 2))} crore ${handleTenLakh(value.substring(2))}`
 }
 
-export { indianFormat, handleTenLakh, handleCrore, handleTenCrore }
+//  everything greater than 9 digits
+function handleArabs(value: string): string {
+  return convertInd(value).trim()
+}
+
+function convertInd(integer: string, fraction?: string, twoDecimalPlaces?: string):string {
+  let result = ``
+
+  if (integer.length > 9) {
+    result = 
+      `${(indianFormat[10] as Function)(integer.substring(0, integer.length - 7))} crore ${(indianFormat[7] as Function)(integer.substring(integer.length - 7))}`
+
+  return result.trim()
+  }
+
+  result = (indianFormat[integer.length] as Function)(integer)
+
+  if (fraction && twoDecimalPlaces && +fraction[0] !== 0) // ignore .01 - .09
+    result = `${result}.${(indianFormat[twoDecimalPlaces.length] as Function)(twoDecimalPlaces)}` //  limit to two decimal places.`
+
+  return result.trim()
+}
+
+export {
+  indianFormat,
+  handleHundreds,
+  handleThousands,
+  handleTenThousands,
+  handleLakh,
+  handleTenLakh,
+  handleCrore,
+  handleTenCrore,
+  convertInd
+}

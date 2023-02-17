@@ -1,5 +1,5 @@
 import { isFirstCharZero, isSecondCharZero, handleOnes, handleTeens, handleTens } from './common'
-import { indianFormat, handleTenLakh, handleCrore, handleTenCrore } from './inidan-system'
+import { indianFormat, handleTenLakh, handleCrore, handleTenCrore, convertInd } from './inidan-system'
 import { convertIntl } from './international-system'
 
 export {
@@ -12,5 +12,6 @@ export {
   handleOnes,
   handleTeens,
   handleTens,
-  convertIntl
+  convertIntl,
+  convertInd
 }
