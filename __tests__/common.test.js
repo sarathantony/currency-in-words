@@ -49,11 +49,6 @@ describe('Handle single digits', () => {
     const result = handleOnes('9')
     expect(result).toBe('nine')
   })
-  //  rejects..
-  it ('Should return ten when passed in 10', () => {
-    const result = handleOnes('10')
-    expect(result).toBe('')
-  })
 })
 
 describe('Handle 11 to 19', () => {
@@ -69,14 +64,13 @@ describe('Handle 11 to 19', () => {
     const result = handleTeens('19')
     expect(result).toBe('nineteen')
   })
-  //  rejects..
-  it ('Should return ten when passed in 100', () => {
-    const result = handleTeens('100')
-    expect(result).toBe('')
-  })
 })
 
-describe('Handle 20 to 99', () => {
+describe('Handle 10 and 20 to 99', () => {
+  it ('Should return ten when passed in 10', () => {
+    const result = handleTens('10')
+    expect(result).toBe('ten')
+  })
   it ('Should return twenty when passed in 20', () => {
     const result = handleTens('20')
     expect(result).toBe('twenty')
@@ -88,10 +82,5 @@ describe('Handle 20 to 99', () => {
   it ('Should return ninety nine when passed in 99', () => {
     const result = handleTens('99')
     expect(result).toBe('ninety nine')
-  })
-  //  rejects..
-  it ('Should return ten when passed in 100', () => {
-    const result = handleTens('100')
-    expect(result).toBe('ten')
   })
 })

@@ -38,4 +38,4 @@ function convertIntl(integer: string, fraction: string, twoDecimalPlaces: string
   return result.trim()
 }
 
-export { convertIntl }
+export { spliceLastThree, resolveValue, handleHundreds, convertIntl }
