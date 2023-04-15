@@ -1,0 +1,27 @@
+- refactor: Added comments for maintainability  and refactored code
+- 2.1.3
+- chores: omitting tests from build
+- 2.1.0
+- chores: error handling and misc updates
+- refactor: refactored code and test cases
+- chores: added test cases for indian-system
+- chores: added test cases for functions in utils/common
+- feat: handling big values
+- 2.0.2
+- 2.0.1
+- chores: misc  updated for readme
+- refactor: misc cleanups
+- 2.0.0
+- feat: Added international-system, supporting test cases and updates
+- 1.1.4
+- chores: updated readme
+- 1.1.3
+- chores: updated readme file
+- 1.1.2
+- ref: refactored code and misc updates
+- 1.1.1
+- chores: updated readme.md with guidelines and other information
+- 1.1.0
+- feat: fixed bugs, added decimal support and supporting test cases
+- init: added indian system support
+- Initial commit
