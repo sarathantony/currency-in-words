@@ -1,3 +1,4 @@
+- refactor: Added comments for maintainability  and refactored code
 - 2.1.3
 - chores: omitting tests from build
 - 2.1.0
