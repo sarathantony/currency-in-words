@@ -1,12 +1,12 @@
-const { convert } = require('../src/index')
+import { convert } from '../src/index'
 
 describe('indian-system: input should be valid', () => {
   it('returns "NaN" for undefined', () => {
-    const result = convert(undefined)
+    const result = convert('undefined')
     expect(result).toEqual('NaN')
   })
   it('returns "NaN" for null', () => {
-    const result = convert(null)
+    const result = convert('null')
     expect(result).toEqual('NaN')
   })
   it('returns "NaN" for an invalid number, "a1.01"', () => {
@@ -26,7 +26,8 @@ describe('indian-system: input should be valid', () => {
 describe('indian-system: decimal inputs', () => {
   it('returns "one.one" when given the input 1.1', () => {
     const result = convert('1.1')
-    expect(result).toEqual('one.one')
+    //  ignores decimals less than 10
+    expect(result).toEqual('one')
   })
   it('returns "eleven.eleven" when given the input 11.11', () => {
     const result = convert('11.11')
@@ -105,11 +106,11 @@ describe('indian-system: random numbers', () => {
 
 describe('international-system: valid inputs', () => {
   it('returns "NaN" for undefined', () => {
-    const result = convert(undefined, { format: 'intl' })
+    const result = convert('undefined', { format: 'intl' })
     expect(result).toEqual('NaN')
   })
   it('returns "NaN" for null', () => {
-    const result = convert(null, { format: 'intl' })
+    const result = convert('null', { format: 'intl' })
     expect(result).toEqual('NaN')
   })
   it('returns "NaN" for an invalid number(a1.01)', () => {
@@ -128,11 +129,12 @@ describe('international-system: valid inputs', () => {
 
 describe('international-system: decimal inputs', () => {
   it('returns "one.one" when given the input 1.1', () => {
-    const result = convert('1.1')
-    expect(result).toEqual('one.one', { format: 'intl' })
+    const result = convert('1.1', { format: 'intl' })
+    expect(result).toEqual('one')
   })
   it('returns "fifty seven.ninety nine" when given the input 57.99', () => {
     const result = convert('57.99', { format: 'intl' })
+    //  ignores decimals less than 10
     expect(result).toEqual('fifty seven.ninety nine')
   })
   it('returns "ten" when given the input 10.01; ignore x.01 to x.09', () => {

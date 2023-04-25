@@ -11,7 +11,7 @@ module.exports = {
 		'webpack.config.js',
 		'coverage/'
 	],
-    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.js$",
+    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
     moduleNameMapper: {'^src/(.*)': '<rootDir>/src/$1'},
 	testEnvironment: 'node',
