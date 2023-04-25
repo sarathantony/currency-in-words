@@ -1,4 +1,4 @@
-const {
+import {
   handleHundreds,
   handleThousands,
   handleTenThousands,
@@ -6,7 +6,7 @@ const {
   handleTenLakh,
   handleCrore,
   handleTenCrore
-} = require('../src/utils/inidan-system')
+} from '../src/utils/inidan-system'
 
 describe('Handle hundreds', () => {
   it('expects one hundred, when passed in 100', () => {

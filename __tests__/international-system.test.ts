@@ -1,4 +1,4 @@
-const { spliceLastThree, resolveValue, handleHundreds } = require('../src/utils/international-system')
+import { spliceLastThree, resolveValue, handleHundreds } from '../src/utils/international-system'
 
 describe('', () => {
 	it('should splice the last three elements of an array', () => {

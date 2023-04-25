@@ -72,7 +72,7 @@ function convertIntl(integer: string, fraction: string, twoDecimalPlaces: string
   let result =
     `${resolveValue(trillions, 'trillion')}${resolveValue(billions, 'billion')}${resolveValue(millions, 'million')}${resolveValue(thousands, 'thousand')}${handleHundreds(hundreds)}`
 
-  if (fraction && +fraction[0] !== 0)
+  if (fraction && twoDecimalPlaces && +fraction[0] !== 0)
   result = `${result.trim()}.${handleTens(twoDecimalPlaces)}`
 
   return result.trim()

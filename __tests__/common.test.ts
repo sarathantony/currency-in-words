@@ -1,10 +1,10 @@
-const {
+import {
   isFirstCharZero,
   isSecondCharZero,
   handleOnes,
   handleTeens,
   handleTens
-} = require('../src/utils/common')
+} from '../src/utils/common'
 
 describe('First char of the passed in string should be literal zero', () => {
   it ('Should return true when passed in 00', () => {

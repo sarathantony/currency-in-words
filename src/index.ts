@@ -48,7 +48,7 @@ export function convert(
    */
   const [integer, fraction] = value.split('.')
   const zeroCorrected: string = `${parseInt(integer, 10)}`
-  const twoDecimalPlaces: string = parseInt(fraction, 10) ? `${fraction.substring(0, 2)}` : ``
+  const twoDecimalPlaces: string = parseInt(fraction, 10) >= 10 ? `${fraction.substring(0, 2)}` : ``
 
   /**
    * This handles place values upto 15 for both indian and international systems, and anything beyond that is thrown with a range error
@@ -62,7 +62,7 @@ export function convert(
    * If the sanitized input is still 0, returns 'zero'
    * eg: '00', '000'
    */
-  if (parseInt(fraction, 10) && zeroCorrected === '0') return `zero.${handleTens(twoDecimalPlaces)}`
+  if (parseInt(fraction, 10) >= 10 && zeroCorrected === '0') return `zero.${handleTens(twoDecimalPlaces)}`
   if (zeroCorrected === '0') return 'zero'
 
    // International format
