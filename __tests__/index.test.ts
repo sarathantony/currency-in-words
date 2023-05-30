@@ -71,6 +71,10 @@ describe('indian-system: random numbers', () => {
     const result = convert('555')
     expect(result).toEqual('five hundred fifty five')
   })
+  it('returns "five hundred fifty five" when given the input 555', () => {
+    const result = convert('00100')
+    expect(result).toEqual('one hundred')
+  })
   it('returns "seventy seven thousand two hundred eighty nine" when given the input 77,289', () => {
     const result = convert('77289')
     expect(result).toEqual('seventy seven thousand two hundred eighty nine')
@@ -89,12 +93,12 @@ describe('indian-system: random numbers', () => {
   })
   it('expects ninety nine crore ninety nine lakhs ninety nine thousand nine hundred ninety nine, when passed in 99,99,99,99,99,99,99,999',
     () => {
-      const result = convert('100000000000000').trim()
+      const result = convert('100000000000000')
       expect(result).toBe('one crore crore')
   })
   it('expects nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine, when passed in 9999999999999999',
     () => {
-      const result = convert('999999999999999').trim()
+      const result = convert('999999999999999')
       expect(result).toBe('nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine crore ninety nine lakh ninety nine thousand nine hundred ninety nine')
   })
   it('expects ninety nine crore ninety nine lakhs ninety nine thousand nine hundred ninety nine, when passed in 99,99,99,99,99,99,99,999',
