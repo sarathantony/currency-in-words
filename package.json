@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "npm run clean && tsc --project tsconfig.json",
-    "clean": "rm -rf dist",
-    "release": "if [ -z \"$1\" ]; then echo 'Error: Version number is required.'; exit 1; fi && sh generate_changelog.sh && npm version $1 && git add package.json && git commit -m 'Bump version to $1' && git push && git push --tags"
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
