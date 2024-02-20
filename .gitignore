@@ -1,4 +1,4 @@
-# for local installation (npm link)
+# for local installation and testing (npm link)
 ./test-folder
 
 # dist
@@ -6,3 +6,6 @@ dist
 
 # node modules
 node_modules
+
+# O.S
+.DS_Store

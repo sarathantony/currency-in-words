@@ -2,13 +2,7 @@
   "include": ["src/**/*"],
   "exclude": [
     "__tests__",
-    "./dist/**/*",
-    "__tests__/**/*.spec.ts",
-    "__tests__/**/*.test.*",
-    "node_modules",
-    "./node_modules",
-    "./node_modules/*",
-    "./node_modules/@types/node/index.d.ts",
+    "dist", // Exclude the build output directory
   ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
