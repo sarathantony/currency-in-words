@@ -2,7 +2,7 @@
   "name": "currency-in-words",
   "version": "2.2.3",
   "description": "A light-weight, fast and efficient lib that converts currency or any numbers to corresponding words",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc --project tsconfig.json",
