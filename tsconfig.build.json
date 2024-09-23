@@ -1,5 +1,8 @@
 {
     "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "declaration": true
+    },
     "exclude": [
       "__tests__",
       "dist", // Exclude the build output directory
