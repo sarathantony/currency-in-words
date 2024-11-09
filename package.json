@@ -5,9 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "npm run clean && tsc --project tsconfig.json",
+    "build": "npm run clean && tsc --project tsconfig.build.json",
     "clean": "rm -rf dist"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sarathantony/currency-in-words.git"
