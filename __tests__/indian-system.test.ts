@@ -6,7 +6,7 @@ import {
   handleTenLakh,
   handleCrore,
   handleTenCrore
-} from '../src/utils/inidan-system'
+} from '../src/utils/indian-system'
 
 describe('Handle hundreds', () => {
   it('expects one hundred, when passed in 100', () => {

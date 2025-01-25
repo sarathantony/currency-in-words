@@ -1,20 +1,12 @@
+import { IConvert } from './index.types'
+
 import { convertIntl, handleTens, convertInd } from './utils'
 
-/**
- * in: Indian system
- * intl: International system
- */
-type standard = 'in' | 'intl'
-type language = 'en'
-interface IConvert {
-  format?: standard,
-  lang?: language
-}
+import { setGlobalConfig, getGlobalConfig } from './lib/globalConfig';
 
 /**
- * converted and translated are used interchangabily
+ * @TODO Fix: converted and translated(literally) are used interchangabily.
  */
-
 /**
  *
  * @param value value to be converted, this can typically contain integer and fractional part, eg: 99.99
@@ -26,8 +18,11 @@ interface IConvert {
  */
 export function convert(
     value: string,
-    { format, lang }: IConvert = { format: 'in', lang: 'en' }
+    { format, lang }: IConvert = { format: getGlobalConfig().format, lang: getGlobalConfig().lang }
   ): string {
+  /** Update the globalConfig */
+  setGlobalConfig({ lang, format })
+
   /**
    * Safe guard against invalid inputs
    * this rejects strings if contained invalid input
