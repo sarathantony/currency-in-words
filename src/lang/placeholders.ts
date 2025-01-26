@@ -9,8 +9,6 @@ import {
 import { CommonLangType, LangTypes } from "../index.types";
 import { getGlobalConfig } from "../lib/globalConfig";
 
-const { lang } = getGlobalConfig();
-
 /**
  * Placeholder values for international numbering systems.
  */
@@ -101,6 +99,8 @@ const indianMap: IndianLangMap = {
  * @throws Error if the language is not supported.
  */
 export const getInternationalPlaceValues = (): InternationalPlaceValuesMap => {
+  const { lang } = getGlobalConfig();
+
   // Define the valid international languages (all LangTypes except 'hi')
   type InternationalLangTypes = Exclude<LangTypes, Omit<IndianLangTypes, CommonLangType>>;
 
@@ -131,6 +131,8 @@ export const getInternationalPlaceValues = (): InternationalPlaceValuesMap => {
  * @throws Error if the language is not supported.
  */
 export const getIndianPlaceValues = (): IndianPlaceValuesMap => {
+const { lang } = getGlobalConfig();
+
   if (!(lang in indianMap)) {
     throw new Error(`Unsupported language for Indian place values: ${lang}`);
   }
