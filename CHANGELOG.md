@@ -1,5 +1,12 @@
-- 2.3.4
-- Merge branch 'develop'
+## 4.0.0
+### Added support for multiple languages
+- Beta release for German, Spanish, French, Hindi, Italian, Dutch and Portuguese
+
+## 3.0.0
+- fix: Fix application entry point
+
+## 2.0.0
+### Added international-system, supporting test cases and updates
 - chores: updated README.md
 - 2.3.3
 - merge: merged develop into main and resolved conflicts
@@ -27,8 +34,11 @@
 - refactor: misc cleanups
 - 2.0.1
 - hot: updated keywords in package.json
-- 2.0.0
-- feat: Added international-system, supporting test cases and updates
+
+## 1.0.0
+### Added the basic structure
+- Initial commit
+-
 - 1.1.4
 - chores: updated readme
 - 1.1.3
@@ -37,7 +47,3 @@
 - ref: refactored code and misc updates
 - 1.1.1
 - chores: updated readme.md with guidelines and other information
-- 1.1.0
-- feat: fixed bugs, added decimal support and supporting test cases
-- init: added indian system support
-- Initial commit

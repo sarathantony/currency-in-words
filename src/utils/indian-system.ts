@@ -1,5 +1,8 @@
-import { singleDigit, twoDigit } from '../lang/en'
 import { isFirstCharZero, isSecondCharZero, handleOnes, handleTens } from './common'
+
+import langMap from "../lang"
+import { getIndianPlaceValues } from '../lang/placeholders'
+import { getGlobalConfig } from "../lib/globalConfig"
 
 interface IIndianFormat {
   [value: number]: string | Function
@@ -26,10 +29,14 @@ const indianFormat: IIndianFormat = {
  * @returns translated value
  */
 function handleHundreds(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+  const { hundred } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleTens(value.substring(1))}`
 
-  return `${singleDigit[+value[0]]} hundred ${handleTens(value.substring(1))}`
+  return `${singleDigit[+value[0]]} ${hundred} ${handleTens(value.substring(1))}`
 }
 
 /**
@@ -39,12 +46,16 @@ function handleHundreds(value: string): string {
  * @returns translated value
  */
 function handleThousands(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+  const { thousand } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleHundreds(value.substring(1))}`
   if (isSecondCharZero(value))
-    return `${singleDigit[+value[0]]} thousand ${handleHundreds(value.substring(1))}`
+    return `${singleDigit[+value[0]]} ${thousand} ${handleHundreds(value.substring(1))}`
 
-  return `${singleDigit[+value[0]]} thousand ${handleHundreds(value.substring(1))}`
+  return `${singleDigit[+value[0]]} ${thousand} ${handleHundreds(value.substring(1))}`
 }
 
 /**
@@ -54,12 +65,16 @@ function handleThousands(value: string): string {
  * @returns translated value
  */
 function handleTenThousands(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { twoDigit } = langMap[lang]
+  const { thousand } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleThousands(value.substring(1))}`
   if (isSecondCharZero(value))
-    return `${twoDigit[+value[0]]} thousand ${handleHundreds(value.substring(2))}`
+    return `${twoDigit[+value[0]]} ${thousand} ${handleHundreds(value.substring(2))}`
 
-  return `${handleTens(value.substring(0, 2))} thousand ${handleHundreds(value.slice(-3))}`
+  return `${handleTens(value.substring(0, 2))} ${thousand} ${handleHundreds(value.slice(-3))}`
 }
 
 /**
@@ -69,10 +84,14 @@ function handleTenThousands(value: string): string {
  * @returns translated value
  */
 function handleLakh(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+  const { lakh } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleTenThousands(value.substring(1))}`
 
-  return `${singleDigit[+value[0]]} lakh ${handleTenThousands(value.substring(1))}`
+  return `${singleDigit[+value[0]]} ${lakh} ${handleTenThousands(value.substring(1))}`
 }
 
 /**
@@ -82,12 +101,16 @@ function handleLakh(value: string): string {
  * @returns translated value
  */
 function handleTenLakh(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { twoDigit } = langMap[lang]
+  const { lakh } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleLakh(value.substring(1))}`
   if (isSecondCharZero(value))
-    return `${twoDigit[+value[0]]} lakh ${handleTenThousands(value.substring(2))}`
+    return `${twoDigit[+value[0]]} ${lakh} ${handleTenThousands(value.substring(2))}`
 
-  return `${handleTens(value.substring(0, 2))} lakh ${handleTenThousands(value.substring(2))}`
+  return `${handleTens(value.substring(0, 2))} ${lakh} ${handleTenThousands(value.substring(2))}`
 }
 
 /**
@@ -97,10 +120,14 @@ function handleTenLakh(value: string): string {
  * @returns translated value
  */
 function handleCrore(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+  const { crore } = getIndianPlaceValues()
+
   if (isFirstCharZero(value))
     return `${handleTenLakh(value.substring(1))}`
 
-  return `${singleDigit[+value[0]]} crore ${handleTenLakh(value.substring(1))}`
+  return `${singleDigit[+value[0]]} ${crore} ${handleTenLakh(value.substring(1))}`
 }
 
 /**
@@ -110,10 +137,14 @@ function handleCrore(value: string): string {
  * @returns translated value
  */
 function handleTenCrore(value: string): string {
-  if (isSecondCharZero(value))
-    return `${twoDigit[+value[0]]} crore ${handleTenLakh(value.substring(2))}`
+  const { lang } = getGlobalConfig()
+  const { twoDigit } = langMap[lang]
+  const { crore } = getIndianPlaceValues()
 
-  return `${handleTens(value.substring(0, 2))} crore ${handleTenLakh(value.substring(2))}`
+  if (isSecondCharZero(value))
+    return `${twoDigit[+value[0]]} ${crore} ${handleTenLakh(value.substring(2))}`
+
+  return `${handleTens(value.substring(0, 2))} ${crore} ${handleTenLakh(value.substring(2))}`
 }
 
 /**
@@ -135,6 +166,8 @@ function handleArabs(value: string): string {
  * @returns  expect an empty or translated string
  */
 function convertInd(integer: string, fraction?: string, twoDecimalPlaces?: string): string {
+  const { crore } = getIndianPlaceValues()
+
   let result = ``
 
   /**
@@ -150,7 +183,7 @@ function convertInd(integer: string, fraction?: string, twoDecimalPlaces?: strin
    */
   if (integer.length > 9) {
     result =
-      `${(indianFormat[10] as Function)(integer.substring(0, integer.length - 7))} crore ${(indianFormat[7] as Function)(integer.substring(integer.length - 7))}`
+      `${(indianFormat[10] as Function)(integer.substring(0, integer.length - 7))} ${crore} ${(indianFormat[7] as Function)(integer.substring(integer.length - 7))}`
 
     return result.trim()
   }

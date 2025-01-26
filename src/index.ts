@@ -1,20 +1,12 @@
+import { ConvertProps, IConvert } from './index.types'
+
 import { convertIntl, handleTens, convertInd } from './utils'
 
-/**
- * in: Indian system
- * intl: International system
- */
-type standard = 'in' | 'intl'
-type language = 'en'
-interface IConvert {
-  format?: standard,
-  lang?: language
-}
+import { setGlobalConfig, getGlobalConfig } from './lib/globalConfig';
 
 /**
- * converted and translated are used interchangabily
+ * @TODO Fix: converted and translated(literally) are used interchangabily.
  */
-
 /**
  *
  * @param value value to be converted, this can typically contain integer and fractional part, eg: 99.99
@@ -24,10 +16,25 @@ interface IConvert {
  *
  * @throws rangeException
  */
-export function convert(
-    value: string,
-    { format, lang }: IConvert = { format: 'in', lang: 'en' }
-  ): string {
+export function convert(arg1: string | ConvertProps, arg2?: IConvert): string {
+  let value: string;
+  let options: IConvert | undefined;
+
+  // HANDLE BACKWARD COMPATIBILITY..
+  if (typeof arg1 === 'string') {
+    // Called as convert(value, options)
+    value = arg1;
+    options = arg2;
+  } else {
+    // Called as convert(props)
+    value = arg1.value;
+    options = arg1.options;
+  }
+
+  const { format, lang } = options || { format: getGlobalConfig().format, lang: getGlobalConfig().lang };
+  /** Update the globalConfig */
+  setGlobalConfig({ lang, format })
+
   /**
    * Safe guard against invalid inputs
    * this rejects strings if contained invalid input
@@ -71,3 +78,5 @@ export function convert(
   //  Indian format
   return convertInd(zeroCorrected, fraction, twoDecimalPlaces)
 }
+
+export type { ConvertProps };

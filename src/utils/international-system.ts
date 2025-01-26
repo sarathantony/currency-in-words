@@ -1,5 +1,7 @@
-import { singleDigit } from "../lang/en"
 import { handleTens } from "./common"
+import langMap from "../lang"
+import { getGlobalConfig } from "../lib/globalConfig"
+import { getInternationalPlaceValues } from '../lang/placeholders'
 
 /**
  * splice the last three characters of the given array
@@ -33,13 +35,17 @@ function resolveValue(value: string, placeholder: string): string {
  * @returns translated value
  */
 function handleHundreds(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+  const { hundred } = getInternationalPlaceValues()
+
   const parsedValue = `${parseInt(value)}`
 
   if (parseInt(value) === 0) return ``
   if (parsedValue.length === 1) return `${singleDigit[+value]}`
   if (parsedValue.length === 2) return `${handleTens(parsedValue)}`
 
-  return `${singleDigit[+value[0]]} hundred ${handleTens(value.substring(1))}`.trim()
+  return `${singleDigit[+value[0]]} ${hundred} ${handleTens(value.substring(1))}`.trim()
 }
 
 /**
@@ -50,6 +56,7 @@ function handleHundreds(value: string): string {
  * @returns translated value
  */
 function convertIntl(integer: string, fraction: string, twoDecimalPlaces: string): string {
+  const { trillion, billion, million, thousand } = getInternationalPlaceValues()
   if (parseInt(integer) === 0) return 'zero'
 
   const integerSplitted: Array<string> = integer.split('')
@@ -70,7 +77,7 @@ function convertIntl(integer: string, fraction: string, twoDecimalPlaces: string
    * Function, resolveValue will append an empty sting for invalid values to the output. This is further sanitized with output.trim()
    */
   let result =
-    `${resolveValue(trillions, 'trillion')}${resolveValue(billions, 'billion')}${resolveValue(millions, 'million')}${resolveValue(thousands, 'thousand')}${handleHundreds(hundreds)}`
+    `${resolveValue(trillions, trillion)}${resolveValue(billions, billion)}${resolveValue(millions, million)}${resolveValue(thousands, thousand)}${handleHundreds(hundreds)}`
 
   if (fraction && twoDecimalPlaces && +fraction[0] !== 0)
   result = `${result.trim()}.${handleTens(twoDecimalPlaces)}`

@@ -10,27 +10,51 @@ ___
 ```javascript
 npm i currency-in-words
 ```
+<br>
+
+<$>[note]
+**Supported Formats:** Indian, International
+
+**Supported Languages:** English
+
+**Beta:** German, Spanish, French, Hindi, Italian, Dutch and Portuguese
+<$>
 
 ### Usage:
 ___
 
 ```javascript
-import { convert } from 'currency-in-words'
+import { convert, type ConvertProps } from 'currency-in-words'
 
-/*
-* IOptions {
-*   format?: 'intl' | 'in'
-*   lang?: 'en'
-* }
-*
-* convert(value: string, {format: 'intl', lang: 'en'}?: IOptions) => string
+/**
+* const options: ConvertProps = {
+*    value: string,
+*    options?: {
+*      lang?: 'en' | 'de' | 'es' | 'fr' | 'hi' | 'it' | 'nl' | 'pt',
+*      format?: 'in' | 'intl'
+*    }
+*  }
 */
 
 //  indian-system
+const inOptions: ConvertProps = {
+  value: '555.77'
+}
+
 const inWords1 = convert('555.77')
+const inWords2 = convert(inOptions)
 
 //  international-system
-const inWords2 = convert('777.55', { format: 'intl' })
+const intlOptions: ConvertProps = {
+  value: '777.55',
+  options: {
+    lang: 'en',
+    format: 'intl'
+  }
+}
+
+const inWords3 = convert('777.55', { format: 'intl' })
+const inWords4 = convert(intlOptions) // pass as options as well.
 ```
 
 ```javascript

@@ -1,4 +1,5 @@
-import { singleDigit, caseOne, twoDigit } from "../lang/en"
+import langMap from "../lang"
+import { getGlobalConfig } from "../lib/globalConfig"
 
 function isFirstCharZero(value: string): boolean {
   return +value[0] === 0
@@ -15,6 +16,9 @@ function isSecondCharZero(value: string): boolean {
  * @returns translated value
  */
 function handleOnes(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit } = langMap[lang]
+
   return singleDigit[+value]
 }
 
@@ -25,6 +29,9 @@ function handleOnes(value: string): string {
  * @returns translated value
  */
 function handleTeens(value: string): string {
+  const { lang } = getGlobalConfig()
+  const { singleDigit, caseOne, twoDigit } = langMap[lang]
+
   if (+value[0] === 1)
     return caseOne[+value.slice(-1)]
   else
@@ -38,6 +45,9 @@ function handleTeens(value: string): string {
  * @returns translated value
  */
 function handleTens(value: string): string {
+const { lang } = getGlobalConfig()
+const { singleDigit, twoDigit } = langMap[lang]
+
   if (isFirstCharZero(value))
     return `${singleDigit[+value[1]]}`
   if (isSecondCharZero(value))
