@@ -1,4 +1,4 @@
-import { IConvert } from './index.types'
+import { ConvertProps, IConvert } from './index.types'
 
 import { convertIntl, handleTens, convertInd } from './utils'
 
@@ -16,10 +16,22 @@ import { setGlobalConfig, getGlobalConfig } from './lib/globalConfig';
  *
  * @throws rangeException
  */
-export function convert(
-    value: string,
-    { format, lang }: IConvert = { format: getGlobalConfig().format, lang: getGlobalConfig().lang }
-  ): string {
+export function convert(arg1: string | ConvertProps, arg2?: IConvert): string {
+  let value: string;
+  let options: IConvert | undefined;
+
+  // HANDLE BACKWARD COMPATIBILITY..
+  if (typeof arg1 === 'string') {
+    // Called as convert(value, options)
+    value = arg1;
+    options = arg2;
+  } else {
+    // Called as convert(props)
+    value = arg1.value;
+    options = arg1.options;
+  }
+
+  const { format, lang } = options || { format: getGlobalConfig().format, lang: getGlobalConfig().lang };
   /** Update the globalConfig */
   setGlobalConfig({ lang, format })
 
@@ -66,3 +78,5 @@ export function convert(
   //  Indian format
   return convertInd(zeroCorrected, fraction, twoDecimalPlaces)
 }
+
+export type { ConvertProps };
