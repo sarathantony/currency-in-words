@@ -1,5 +1,9 @@
-import { singleDigit } from "../lang/en"
 import { handleTens } from "./common"
+import langMap from "../lang"
+import { getGlobalConfig } from "../lib/globalConfig"
+
+const { lang } = getGlobalConfig()
+const { singleDigit } = langMap[lang]
 
 /**
  * splice the last three characters of the given array

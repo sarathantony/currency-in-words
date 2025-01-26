@@ -4,6 +4,8 @@
  */
 export type FormatTypes = 'in' | 'intl'
 
+export type CommonLangType = 'en';
+
 /**
  * Supported languages
  *
@@ -16,7 +18,7 @@ export type FormatTypes = 'in' | 'intl'
  * nl: Dutch
  * pt: Portuguese
  */
-export type LangTypes = 'de' | 'en' | 'es' | 'fr' | 'hi' | 'it' | 'nl' | 'pt'
+export type LangTypes = CommonLangType | 'de' | 'es' | 'fr' | 'hi' | 'it' | 'nl' | 'pt'
 
 export interface IConvert {
   format?: FormatTypes

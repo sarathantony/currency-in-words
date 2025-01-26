@@ -1,4 +1,8 @@
-import { singleDigit, caseOne, twoDigit } from "../lang/en"
+import langMap from "../lang"
+import { getGlobalConfig } from "../lib/globalConfig"
+
+const { lang } = getGlobalConfig()
+const { singleDigit, caseOne, twoDigit } = langMap[lang]
 
 function isFirstCharZero(value: string): boolean {
   return +value[0] === 0
